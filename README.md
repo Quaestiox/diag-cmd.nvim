@@ -2,14 +2,14 @@
 
 This plugin provides various commands for more flexible display of diagnostic information.
 
-### Installing
+## Installing
 
-#### lazy:
+### lazy:
 ``` 
 { "Quaestiox/diag-cmd.nvim" },
 ```
 
-### Options
+## Options
 ```lua
 local diag = require("diag-cmd")
 diag.setup({
@@ -23,7 +23,10 @@ diag.setup({
 })
 ```
 
-### Usage
+## Usage
+
+### Commands
+
 - `VirtualText` : enable/disable virtual_text
 - `Signs` : enable/disable signs
 - `Underline` : enable/disable underline
