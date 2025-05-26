@@ -1,10 +1,18 @@
 # diag_cmd
 
+### Install
+lazy:
+```
+{ 
+    { "Quaestiox/diag_cmd" },
+}
+```
+
 ### Command
-`VirtualText` : enable virtual_text
-`Signs` : enable signs
-`Underline` : enable underline
-`UpdateInInsert` : enable update_in_insert
+`VirtualText` : enable/disable virtual_text
+`Signs` : enable/disable signs
+`Underline` : enable/disable underline
+`UpdateInInsert` : enable/disable update_in_insert
 `DiagEnableAll` : enable all field in config
 `DiagDisable` : disable diagnostic 
 `DiagDefault` : if you not setup show_config, you will use default config
@@ -22,7 +30,7 @@ diag.setup({
 		update_in_insert = true,
 	},
 
-    -- choose the file type which you don't want to use diagnostic
+    -- choose the file type which you don't want to use diagnosis
 	disabled_file_type = { "lua" },
 })
 ```
