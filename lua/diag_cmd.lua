@@ -68,6 +68,10 @@ local function diag_disable(opts)
 	vim.diagnostic.config(M.disableCfg)
 end
 
+local function diag_custom_disable(opts)
+	M.customCfg = M.disableCfg
+end
+
 local function diag_custom(opts)
 	vim.diagnostic.config(M.customCfg)
 end
@@ -85,38 +89,28 @@ vim.api.nvim_create_user_command("DiagDefault", diag_default, {})
 vim.api.nvim_create_user_command("DiagDisable", diag_disable, {})
 
 M.setup = function(config)
-	cfg = config or M.defaultCfg
-	M.customCfg = cfg
+	local cfg = config or {}
+	cfg.show_config = config.show_config or M.defaultCfg
+	M.customCfg = cfg.show_config
+	M.enabled_file_type = cfg.enabled_file_type
+	M.disabled_file_type = cfg.disabled_file_type
 end
 
+function M.disable_file_type() end
 
-
-vim.diagnostic.config({
-	virtual_text = M.customCfg.virtual_text,
-	signs = M.customCfg.signs,
-	underline = M.customCfg.underline,
-	update_in_insert = M.customCfg.update_in_insert,
-})
-
-function M.disable_file_type()
-	if not M.disabled_file_type then
-		return
-	end
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = M.disabled_file_type,
-		callback = diag_disable,
-	})
-end
-
-function M.enable_file_type()
-	if not M.enabled_file_type then
-		return
+local function load()
+	if M.disabled_file_type then
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = M.disabled_file_type,
+			callback = diag_custom_disable,
+		})
 	end
 
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = M.enabled_file_type,
-		callback = diag_custom,
-	})
+	vim.diagnostic.config(M.customCfg)
 end
+
+load()
 
 return M
+
+
