@@ -14,6 +14,13 @@ M.disableCfg = {
 	update_in_insert = false,
 }
 
+M.enableCfg= {
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = true,
+}
+
 M.customCfg = {}
 
 M.disabled_file_type = {}
@@ -76,6 +83,10 @@ local function diag_custom(opts)
 	vim.diagnostic.config(M.customCfg)
 end
 
+local function diag_enable_all(opts)
+	vim.diagnostic.config(M.enableCfg)
+end
+
 vim.api.nvim_create_user_command("VirtualText", virtual_text, {})
 
 vim.api.nvim_create_user_command("Signs", signs, {})
@@ -87,6 +98,12 @@ vim.api.nvim_create_user_command("UpdateInInsert", update_in_insert, {})
 vim.api.nvim_create_user_command("DiagDefault", diag_default, {})
 
 vim.api.nvim_create_user_command("DiagDisable", diag_disable, {})
+
+vim.api.nvim_create_user_command("DiagCustom", diag_custom, {})
+
+vim.api.nvim_create_user_command("DiagEnableAll", diag_enable_all, {})
+
+
 
 M.setup = function(config)
 	local cfg = config or {}
