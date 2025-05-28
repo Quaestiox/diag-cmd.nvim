@@ -14,12 +14,25 @@ This plugin provides various commands for more flexible display of diagnostic in
 local diag = require("diag-cmd")
 diag.setup({
 	show_config = {
-		virtual_text = true,
+		virtual_text = false,
+        virtual_line = false
 		signs = true,
 		underline = true,
-		update_in_insert = true,
+		update_in_insert = false,
 	},
+    -- the file types which you don't want to use diagnostic message
 	disabled_file_type = { "lua" },
+
+    -- floating window's style
+    float = {
+		scope = "line",
+		border = "rounded",
+		source = "always",
+		focusable = false,
+		header = "💡",
+		jump = true,
+
+    }
 })
 ```
 
@@ -36,4 +49,5 @@ diag.setup({
 - `DiagDisable` : disable diagnostic 
 - `DiagDefault` : if you not setup show_config, you will use default config
 - `DiagCustom` : Load your config manually
+- `DiagFloat` : Display the diagnostic message in the floating window
 
