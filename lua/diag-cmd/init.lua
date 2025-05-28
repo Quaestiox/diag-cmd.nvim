@@ -2,6 +2,7 @@ local M = {}
 
 M.defaultCfg = {
 	virtual_text = false,
+    virtual_line = false, 
 	signs = true,
 	underline = true,
 	update_in_insert = false,
@@ -9,6 +10,7 @@ M.defaultCfg = {
 
 M.disableCfg = {
 	virtual_text = false,
+    virtual_line = false, 
 	signs = false,
 	underline = false,
 	update_in_insert = false,
@@ -16,6 +18,7 @@ M.disableCfg = {
 
 M.enableCfg = {
 	virtual_text = true,
+    virtual_line = true, 
 	signs = true,
 	underline = true,
 	update_in_insert = true,
@@ -29,6 +32,18 @@ local function virtual_text(opts)
 	local cfg = vim.diagnostic.config()
 	vim.diagnostic.config({
 		virtual_text = not cfg.virtual_text,
+        virtual_line = cfg.virtual_line, 
+		signs = cfg.signs,
+		underline = cfg.underline,
+		update_in_insert = cfg.update_in_insert,
+	})
+end
+
+local function virtual_line(opts)
+	local cfg = vim.diagnostic.config()
+	vim.diagnostic.config({
+		virtual_text = cfg.virtual_text,
+        virtual_line = not cfg.virtual_line, 
 		signs = cfg.signs,
 		underline = cfg.underline,
 		update_in_insert = cfg.update_in_insert,
@@ -39,6 +54,7 @@ local function signs(opts)
 	local cfg = vim.diagnostic.config()
 	vim.diagnostic.config({
 		virtual_text = cfg.virtual_text,
+        virtual_line = cfg.virtual_line, 
 		signs = not cfg.signs,
 		underline = cfg.underline,
 		update_in_insert = cfg.update_in_insert,
@@ -49,6 +65,7 @@ local function underline(opts)
 	local cfg = vim.diagnostic.config()
 	vim.diagnostic.config({
 		virtual_text = cfg.virtual_text,
+        virtual_line = cfg.virtual_line, 
 		signs = cfg.signs,
 		underline = not cfg.underline,
 		update_in_insert = cfg.update_in_insert,
@@ -59,6 +76,7 @@ local function update_in_insert(opts)
 	local cfg = vim.diagnostic.config()
 	vim.diagnostic.config({
 		virtual_text = cfg.virtual_text,
+        virtual_line = cfg.virtual_line, 
 		signs = cfg.signs,
 		underline = cfg.underline,
 		update_in_insert = not cfg.update_in_insert,

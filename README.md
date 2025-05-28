@@ -28,6 +28,7 @@ diag.setup({
 ### Commands
 
 - `VirtualText` : enable/disable virtual_text
+- `VirtualLine` : enable/disable virtual_line
 - `Signs` : enable/disable signs
 - `Underline` : enable/disable underline
 - `UpdateInInsert` : enable/disable update_in_insert
@@ -35,6 +36,4 @@ diag.setup({
 - `DiagDisable` : disable diagnostic 
 - `DiagDefault` : if you not setup show_config, you will use default config
 - `DiagCustom` : Load your config manually
-
-
 
