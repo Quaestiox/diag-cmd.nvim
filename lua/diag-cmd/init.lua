@@ -1,3 +1,4 @@
+
 local M = {}
 
 M.defaultCfg = {
@@ -27,6 +28,19 @@ M.enableCfg = {
 M.customCfg = {}
 
 M.disabled_file_type = {}
+
+M.defaultFloat = {
+		scope = "line",
+		border = "rounded",
+		source = "always",
+		focusable = false,
+		header = "💡",
+		jump = true,
+}
+
+M.customFloat = {}
+
+
 
 local function virtual_text(opts)
 	local cfg = vim.diagnostic.config()
@@ -99,7 +113,14 @@ local function diag_enable_all(opts)
 	vim.diagnostic.config(M.enableCfg)
 end
 
+local function open_diag_float()
+	vim.diagnostic.open_float(M.customFloat)
+end
+
+
 vim.api.nvim_create_user_command("VirtualText", virtual_text, {})
+
+vim.api.nvim_create_user_command("VirtualLine", virtual_line, {})
 
 vim.api.nvim_create_user_command("Signs", signs, {})
 
@@ -115,6 +136,9 @@ vim.api.nvim_create_user_command("DiagCustom", diag_custom, {})
 
 vim.api.nvim_create_user_command("DiagEnableAll", diag_enable_all, {})
 
+vim.api.nvim_create_user_command("DiagFloat", open_diag_float, {})
+
+
 local function load()
 	if M.disabled_file_type then
 		vim.api.nvim_create_autocmd("FileType", {
@@ -128,13 +152,18 @@ end
 
 M.setup = function(config)
 	local cfg = config or {}
-	cfg.show_config = config.show_config or M.defaultCfg
+	cfg.show_config = cfg.show_config or M.defaultCfg
 	M.customCfg = cfg.show_config
 	M.enabled_file_type = cfg.enabled_file_type
 	M.disabled_file_type = cfg.disabled_file_type
-
+    M.customFloat = cfg.customFloat or M.defaultFloat
 
     load()
 end
 
 return M
+
+
+
+
+
